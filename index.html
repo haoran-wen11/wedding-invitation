@@ -6,11 +6,11 @@
 <title>文浩然 & 朱莹 | 婚礼邀请</title>
 <meta property="og:title" content="文浩然 &amp; 朱莹 · 婚礼邀请">
 <meta property="og:description" content="Whimsy Feast 奇幻盛宴 | 诚邀您来见证我们的重要时刻 · 2026年7月10日">
-<meta property="og:image" content="https://haoran-ying.online/photos/IMG_8146.JPG">
+<meta property="og:image" content="https://haoran-ying.online/photos/share-card.png">
 <meta property="og:url" content="https://haoran-ying.online/">
 <meta property="og:type" content="website">
-<meta property="og:image:width" content="800">
-<meta property="og:image:height" content="1200">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="description" content="文浩然 &amp; 朱莹 诚挚邀请您参加我们的婚礼 · 2026年7月10日 · 凯丽瑞丝酒店·天水">
   <meta property="og:image:alt" content="文浩然 &amp; 朱莹 婚礼邀请">
   <meta property="og:locale" content="zh_CN">
@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="文浩然 &amp; 朱莹 · 婚礼邀请">
   <meta name="twitter:description" content="Whimsy Feast 奇幻盛宴 | 2026年7月10日">
-  <meta name="twitter:image" content="https://haoran-ying.online/photos/IMG_8146.JPG">
+  <meta name="twitter:image" content="https://haoran-ying.online/photos/share-card.png">
 
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;600&family=Alex+Brush&family=Ma+Shan+Zheng&family=Long+Cang&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
@@ -578,8 +578,7 @@ section{padding:56px 32px;position:relative}
 
   <!-- RSVP Form -->
   <div class="rsvp-form-card reveal reveal-d5">
-    <form id="rsvpForm" data-netlify="true" onsubmit="submitRSVP(event)">
-      <input type="hidden" name="form-name" value="RSVP Form">
+    <form id="rsvpForm" onsubmit="submitRSVP(event)">
       <div class="form-group">
         <label class="form-label" for="name">姓名 <span>Full name</span></label>
         <input class="form-input" type="text" id="name" name="name" placeholder="" required>
@@ -635,7 +634,7 @@ function submitRSVP(e){
   const btn=e.target.querySelector('.submit-btn');
   btn.disabled=true;btn.textContent='提交中…';
   const formData=new FormData(e.target);
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(formData).toString()})
+  fetch('/submit',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(formData).toString()})
   .then(()=>{
     document.getElementById('rsvpForm').style.display='none';
     document.getElementById('rsvpSuccess').classList.add('show');
