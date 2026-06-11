@@ -6,11 +6,11 @@
 <title>文浩然 & 朱莹 | 婚礼邀请</title>
 <meta property="og:title" content="文浩然 &amp; 朱莹 · 婚礼邀请">
 <meta property="og:description" content="Whimsy Feast 奇幻盛宴 | 诚邀您来见证我们的重要时刻 · 2026年7月10日">
-<meta property="og:image" content="https://haoran-ying.online/photos/IMG_8146.JPG">
+<meta property="og:image" content="https://haoran-ying.online/photos/share-card.png">
 <meta property="og:url" content="https://haoran-ying.online/">
 <meta property="og:type" content="website">
-<meta property="og:image:width" content="800">
-<meta property="og:image:height" content="1200">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="description" content="文浩然 &amp; 朱莹 诚挚邀请您参加我们的婚礼 · 2026年7月10日 · 凯丽瑞丝酒店·天水">
   <meta property="og:image:alt" content="文浩然 &amp; 朱莹 婚礼邀请">
   <meta property="og:locale" content="zh_CN">
@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="文浩然 &amp; 朱莹 · 婚礼邀请">
   <meta name="twitter:description" content="Whimsy Feast 奇幻盛宴 | 2026年7月10日">
-  <meta name="twitter:image" content="https://haoran-ying.online/photos/IMG_8146.JPG">
+  <meta name="twitter:image" content="https://haoran-ying.online/photos/share-card.png">
 
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;600&family=Alex+Brush&family=Ma+Shan+Zheng&family=Long+Cang&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
@@ -577,37 +577,14 @@ section{padding:56px 32px;position:relative}
   <p class="form-instruction-en reveal reveal-d4">Please fill in guest information</p>
 
   <!-- RSVP Form -->
-  <div class="rsvp-form-card reveal reveal-d5">
-    <form id="rsvpForm" data-netlify="true" onsubmit="submitRSVP(event)">
-      <input type="hidden" name="form-name" value="RSVP Form">
-      <div class="form-group">
-        <label class="form-label" for="name">姓名 <span>Full name</span></label>
-        <input class="form-input" type="text" id="name" name="name" placeholder="" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">是否出席 <span>Are you available to attend?</span></label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="attending" value="yes" checked> 是 Yes</label>
-          <label class="radio-label"><input type="radio" name="attending" value="no"> 否 No</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="guests">出席人数 <span>Attendance</span></label>
-        <input class="form-input" type="number" id="guests" name="guests" value="1" min="1" max="10" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="message">留言 <span>Message blessings</span></label>
-        <textarea class="form-textarea" id="message" name="message" placeholder="" required></textarea>
-      </div>
-      <button class="submit-btn" type="submit">提交 submit</button>
-    </form>
-    <div class="rsvp-success" id="rsvpSuccess">
-      <div class="rsvp-success-icon">
-        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="16" fill="none" stroke="#b8a07a" stroke-width="1.2"/><path d="M14 20 L18 24 L26 15" fill="none" stroke="#b8a07a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="rsvp-success-text">已收到</div>
-      <div class="rsvp-success-sub">感谢您的回复，期待您的到来</div>
-    </div>
+  <div class="rsvp-form-card reveal reveal-d5" style="text-align:center">
+    <p style="font-size:14px;color:#8a7a78;line-height:2;margin:0 auto 24px;letter-spacing:1px;max-width:280px">
+      点击下方按钮，前往填写您的出席信息
+    </p>
+    <a href="https://docs.qq.com/form/page/DVnRLSkZycnROeGdy" target="_blank" rel="noopener"
+       class="submit-btn" style="display:inline-block;text-decoration:none;width:auto;padding:12px 32px">
+      填写宾客信息 →
+    </a>
   </div>
 
   <div class="footer-thanks reveal">Thank You</div>
@@ -628,23 +605,6 @@ section{padding:56px 32px;position:relative}
 let pl=document.getElementById("preloader");function hp(){pl.classList.add("hidden")}window.addEventListener("load",()=>setTimeout(hp,300));setTimeout(hp,2000);
 const ro=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));
-function submitRSVP(e){
-  e.preventDefault();
-  const name=document.getElementById('name').value.trim();
-  if(!name)return;
-  const btn=e.target.querySelector('.submit-btn');
-  btn.disabled=true;btn.textContent='提交中…';
-  const formData=new FormData(e.target);
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(formData).toString()})
-  .then(()=>{
-    document.getElementById('rsvpForm').style.display='none';
-    document.getElementById('rsvpSuccess').classList.add('show');
-  })
-  .catch(()=>{
-    document.getElementById('rsvpForm').style.display='none';
-    document.getElementById('rsvpSuccess').classList.add('show');
-  });
-}
 function toggleMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");a.paused?(a.play().catch(function(){}),t.classList.remove("paused"),t.classList.add("playing")):(a.pause(),t.classList.remove("playing"),t.classList.add("paused"))}function _auto(){var a=document.getElementById("bgMusic");if(!a||!a.paused)return;a.play().catch(function(){});document.getElementById("musicToggle").classList.remove("paused");document.getElementById("musicToggle").classList.add("playing")}document.addEventListener("click",_auto,{once:true});document.addEventListener("touchstart",_auto,{once:true});document.addEventListener("WeixinJSBridgeReady",_auto,{once:true});if(window.WeixinJSBridge){_auto()}
 document.body.style.overflow="hidden";document.getElementById("splash").addEventListener("click",function(){document.body.style.overflow="";this.classList.add("hidden")});document.getElementById("splash").addEventListener("touchmove",function(e){e.preventDefault()},{passive:false});
 

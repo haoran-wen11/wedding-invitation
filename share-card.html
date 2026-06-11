@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Card Generator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #e8e0d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    /* 柔和的奶油色背景 */
+    background: linear-gradient(135deg, #f7f2ea 0%, #f0e8db 40%, #e8ddd0 100%);
+  }
+  /* 纹理叠加 */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(160,145,130,.03) 1px, rgba(160,145,130,.03) 2px),
+      radial-gradient(ellipse at 30% 50%, rgba(200,185,165,.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 50%, rgba(180,160,140,.08) 0%, transparent 50%);
+    z-index: 1;
+  }
+  /* 金色边框 */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(184,160,122,.3);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .card-inner {
+    position: absolute;
+    inset: 24px;
+    border: 1px solid rgba(184,160,122,.25);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .content {
+    text-align: center;
+    position: relative;
+    z-index: 3;
+    padding: 0 80px;
+  }
+  /* 顶部装饰线 */
+  .ornament-top {
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .ornament-top::before,
+  .ornament-top::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c0a880);
+  }
+  .ornament-top::after {
+    background: linear-gradient(90deg, #c0a880, transparent);
+  }
+  .ornament-diamond {
+    color: #b8a07a;
+    font-size: 12px;
+    letter-spacing: 8px;
+  }
+  /* 主标题 */
+  .label {
+    font-family: "Alex Brush", "Georgia", cursive;
+    font-size: 28px;
+    color: #b8a07a;
+    letter-spacing: 6px;
+    margin-bottom: 12px;
+  }
+  .names {
+    font-family: "Noto Serif SC", "STSong", "Songti SC", serif;
+    font-size: 52px;
+    color: #3d3536;
+    letter-spacing: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .ampersand {
+    font-family: "Alex Brush", "Georgia", cursive;
+    color: #b8a07a;
+    font-size: 36px;
+    margin: 0 8px;
+  }
+  .details {
+    font-family: "Noto Serif SC", "STSong", "Songti SC", serif;
+    font-size: 21px;
+    color: #6b5e5a;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c0a880, transparent);
+    margin: 0 auto 20px;
+  }
+  .footer-text {
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 18px;
+    color: #b8a07a;
+    letter-spacing: 5px;
+    font-style: italic;
+  }
+  /* 角落装饰 */
+  .corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+  }
+  .corner-tl { top: 12px; left: 12px; border-top: 1.5px solid rgba(184,160,122,.4); border-left: 1.5px solid rgba(184,160,122,.4); }
+  .corner-tr { top: 12px; right: 12px; border-top: 1.5px solid rgba(184,160,122,.4); border-right: 1.5px solid rgba(184,160,122,.4); }
+  .corner-bl { bottom: 12px; left: 12px; border-bottom: 1.5px solid rgba(184,160,122,.4); border-left: 1.5px solid rgba(184,160,122,.4); }
+  .corner-br { bottom: 12px; right: 12px; border-bottom: 1.5px solid rgba(184,160,122,.4); border-right: 1.5px solid rgba(184,160,122,.4); }
+
+  /* 说明文字 */
+  .instructions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,.75);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: -apple-system, sans-serif;
+    z-index: 100;
+    text-align: center;
+  }
+  .instructions strong { color: #ffd700; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="card-inner">
+      <div class="content">
+        <div class="ornament-top">
+          <span class="ornament-diamond">◆</span>
+        </div>
+        <div class="label">Whimsy Feast</div>
+        <div class="names">
+          文浩然 <span class="ampersand">&amp;</span> 朱莹
+        </div>
+        <div class="details">
+          诚邀您见证我们的婚礼<br>
+          2026年7月10日 · 凯丽瑞丝酒店·天水
+        </div>
+        <div class="divider"></div>
+        <div class="footer-text">You are cordially invited</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    📸 按 <strong>Cmd+Shift+4</strong> 框选卡⽚区域截图 → 保存为 <strong>share-card.png</strong><br>
+    或打开浏览器开发者工具 → 设置视口为 1200×630 → 截图
+  </div>
+
+  <script>
+    // 自动滚动到卡片居中位置
+    window.onload = () => {
+      const card = document.querySelector('.card');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+  </script>
+</body>
+</html>
