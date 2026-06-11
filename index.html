@@ -617,11 +617,11 @@ function submitRSVP(e){
     document.getElementById('rsvpSuccess').classList.add('show');
   });
 }
-function toggleMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");a.paused?(a.play().catch(function(){}),t.classList.remove("paused"),t.classList.add("playing")):(a.pause(),t.classList.remove("playing"),t.classList.add("paused"))}var _ms=false;function _ft(){if(!_ms){_ms=true;toggleMusic()}}document.addEventListener("click",_ft,{once:true});document.addEventListener("touchstart",_ft,{once:true});document.addEventListener("WeixinJSBridgeReady",_ft,{once:true});if(window.WeixinJSBridge){_ft()}setTimeout(function(){document.getElementById("musicToggle").addEventListener("click",toggleMusic)},100)
+function toggleMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");a.paused?(a.play().catch(function(){}),t.classList.remove("paused"),t.classList.add("playing")):(a.pause(),t.classList.remove("playing"),t.classList.add("paused"))}function _auto(){var a=document.getElementById("bgMusic");if(!a||!a.paused)return;a.play().catch(function(){});document.getElementById("musicToggle").classList.remove("paused");document.getElementById("musicToggle").classList.add("playing")}document.addEventListener("click",_auto,{once:true});document.addEventListener("touchstart",_auto,{once:true});document.addEventListener("WeixinJSBridgeReady",_auto,{once:true});if(window.WeixinJSBridge){_auto()}
 
 </script>
 <audio id="bgMusic" loop preload="auto" playsinline><source src="music/bgm.mp3" type="audio/mpeg"></audio>
-<div class="music-toggle playing" id="musicToggle" >
+<div class="music-toggle playing" id="musicToggle" onclick="toggleMusic()">
   <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#b8a07a" stroke="none"/><circle cx="18" cy="16" r="3" fill="#b8a07a" stroke="none"/></svg>
 </div>
 
