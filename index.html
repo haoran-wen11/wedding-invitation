@@ -544,10 +544,11 @@ section{padding:56px 32px;position:relative}
 
   <!-- RSVP Form -->
   <div class="rsvp-form-card reveal reveal-d5">
-    <form id="rsvpForm" onsubmit="submitRSVP(event)">
+    <form id="rsvpForm" data-netlify="true" onsubmit="submitRSVP(event)">
+      <input type="hidden" name="form-name" value="RSVP Form">
       <div class="form-group">
         <label class="form-label" for="name">姓名 <span>Full name</span></label>
-        <input class="form-input" type="text" id="name" placeholder="" required>
+        <input class="form-input" type="text" id="name" name="name" placeholder="" required>
       </div>
       <div class="form-group">
         <label class="form-label">是否出席 <span>Are you available to attend?</span></label>
@@ -558,11 +559,11 @@ section{padding:56px 32px;position:relative}
       </div>
       <div class="form-group">
         <label class="form-label" for="guests">出席人数 <span>Attendance</span></label>
-        <input class="form-input" type="number" id="guests" value="1" min="1" max="10" required>
+        <input class="form-input" type="number" id="guests" name="guests" value="1" min="1" max="10" required>
       </div>
       <div class="form-group">
         <label class="form-label" for="message">留言 <span>Message blessings</span></label>
-        <textarea class="form-textarea" id="message" placeholder="" required></textarea>
+        <textarea class="form-textarea" id="message" name="message" placeholder="" required></textarea>
       </div>
       <button class="submit-btn" type="submit">提交 submit</button>
     </form>
@@ -599,10 +600,16 @@ function submitRSVP(e){
   if(!name)return;
   const btn=e.target.querySelector('.submit-btn');
   btn.disabled=true;btn.textContent='提交中…';
-  setTimeout(()=>{
+  const formData=new FormData(e.target);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(formData).toString()})
+  .then(()=>{
     document.getElementById('rsvpForm').style.display='none';
     document.getElementById('rsvpSuccess').classList.add('show');
-  },800);
+  })
+  .catch(()=>{
+    document.getElementById('rsvpForm').style.display='none';
+    document.getElementById('rsvpSuccess').classList.add('show');
+  });
 }
 </script>
 </body>
