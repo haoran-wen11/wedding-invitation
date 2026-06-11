@@ -13,9 +13,9 @@
 <meta property="og:image:height" content="1600">
 <meta name="description" content="文浩然 &amp; 朱莹 诚挚邀请您参加我们的婚礼 · 2026年7月10日 · 凯丽瑞丝酒店·天水">
 
-<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Dancing+Script:wght@400;500;600;700&family=Alex+Brush&family=Ma+Shan+Zheng&family=Long+Cang&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Dancing+Script:wght@400;500;600;700&family=Alex+Brush&family=Ma+Shan+Zheng&family=Long+Cang&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
-  <link rel="preload" as="image" href="素材图/IMG_8146.JPG">
+<link rel="preload" as="image" href="素材图/IMG_8146.JPG">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -591,7 +591,7 @@ section{padding:56px 32px;position:relative}
 </div><!-- /invitation -->
 
 <script>
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('preloader').classList.add('hidden')},400)});
+let pl=document.getElementById("preloader");function hp(){pl.classList.add("hidden")}window.addEventListener("load",()=>setTimeout(hp,300));setTimeout(hp,2000);
 const ro=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));
 function submitRSVP(e){
