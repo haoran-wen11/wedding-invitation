@@ -533,7 +533,7 @@ section{padding:56px 32px;position:relative}
         <div class="detail-label">婚礼地点 ADDRESS</div>
         <div class="detail-value">凯丽瑞斯酒店·宴会厅</div>
         <div class="detail-sub">甘肃省天水市</div>
-        <a class="detail-btn" href="https://map.baidu.com/m?wd=凯丽瑞斯酒店" target="_blank" rel="noopener">导航前往 →</a>
+        <a class="detail-btn" id="navBtn" target="_blank" rel="noopener">导航前往 →</a>
       </div>
     </div>
   </div>
@@ -608,7 +608,7 @@ section{padding:56px 32px;position:relative}
 <script>
 let pl=document.getElementById("preloader");function hp(){pl.classList.add("hidden")}window.addEventListener("load",()=>setTimeout(hp,300));setTimeout(hp,2000);
 const ro=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));document.getElementById("bgMusic").volume=0.5;
+document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));document.getElementById("bgMusic").volume=0.5;(function(){var b=document.getElementById("navBtn");var u=navigator.userAgent;/iPhone|iPad|iPod/.test(u)&&!/Macintosh.*Safari/.test(u)?b.href="https://maps.apple.com/?q=凯丽瑞斯酒店+天水":b.href="https://map.baidu.com/m?wd=凯丽瑞斯酒店"})();
 function toggleMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");if(a.paused){a.play().then(function(){t.classList.remove("paused");t.classList.add("playing")}).catch(function(){})}else{a.pause();t.classList.remove("playing");t.classList.add("paused")}}function tryAutoPlay(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");a.play().then(function(){t.classList.remove("paused");t.classList.add("playing")}).catch(function(){t.classList.remove("playing");t.classList.add("paused")})}tryAutoPlay();document.addEventListener("WeixinJSBridgeReady",tryAutoPlay,{once:true});if(window.WeixinJSBridge){tryAutoPlay()}document.addEventListener("click",tryAutoPlay,{once:true});document.addEventListener("touchstart",tryAutoPlay,{once:true})
 function doSubmit(f){f.querySelector("#submitBtn").disabled=true;f.querySelector("#submitBtn").textContent="提交中…";}
 function submitDone(){document.getElementById("rsvpForm").style.display="none";document.getElementById("rsvpSuccess").classList.add("show")}
