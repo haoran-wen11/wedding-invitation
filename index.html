@@ -607,7 +607,7 @@ section{padding:56px 32px;position:relative}
       <div class="rsvp-success-text">已收到</div>
       <div class="rsvp-success-sub">感谢您的回复，期待您的到来</div>
       <p style="margin-top:20px;font-size:12px;color:#b8a07a;letter-spacing:1px">
-        <a href="https://wedding-invitation.haoranwen92.workers.dev/admin?key=wenying2026" target="_blank" style="color:#b8a07a;text-decoration:none">查看回复 →</a>
+        <a href="/admin?key=wenying2026" target="_blank" style="color:#b8a07a;text-decoration:none">查看回复 →</a>
       </p>
     </div>
   </div>
@@ -635,7 +635,7 @@ document.body.style.overflow="hidden";document.getElementById("splash").addEvent
 document.getElementById("rsvpForm").addEventListener("submit",function(e){
   e.preventDefault();var btn=e.target.querySelector("#submitBtn");
   btn.disabled=true;btn.textContent="提交中…";
-  fetch("https://wedding-invitation.haoranwen92.workers.dev/submit",{method:"POST",body:new FormData(e.target)})
+  fetch("/submit",{method:"POST",body:new FormData(e.target)})
   .then(function(){e.target.style.display="none";document.getElementById("rsvpSuccess").classList.add("show")})
   .catch(function(){e.target.style.display="none";document.getElementById("rsvpSuccess").classList.add("show")});
 });
