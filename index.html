@@ -648,8 +648,13 @@ document.getElementById("rsvpForm").addEventListener("submit",function(e){
 (function(){
   var p=new URLSearchParams(window.location.search);
   if(p.get("submitted")==="1"){
-    var f=document.getElementById("rsvpForm");
-    if(f){f.style.display="none";document.getElementById("rsvpSuccess").classList.add("show")}
+    document.getElementById("preloader").classList.add("hidden");
+    document.getElementById("splash").classList.add("hidden");
+    setTimeout(function(){
+      var f=document.getElementById("rsvpForm");
+      if(f){f.style.display="none";document.getElementById("rsvpSuccess").classList.add("show")}
+      document.getElementById("rsvpForm").scrollIntoView({behavior:"instant"});
+    },100);
   }
 })();
 </script>
