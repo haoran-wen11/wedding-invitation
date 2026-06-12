@@ -624,6 +624,10 @@ section{padding:56px 32px;position:relative}
 
 </div><!-- /invitation -->
 
+<audio id="bgMusic" loop preload="auto" playsinline><source src="music/bgm.mp3" type="audio/mpeg"></audio>
+<div class="music-toggle paused" id="musicToggle" onclick="toggleMusic()">
+  <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#b8a07a" stroke="none"/><circle cx="18" cy="16" r="3" fill="#b8a07a" stroke="none"/></svg>
+</div>
 <script>
 (function(){
   var bg=document.getElementById("bgMusic"),mt=document.getElementById("musicToggle");
@@ -665,10 +669,6 @@ function doSubmit(f){f.querySelector("#submitBtn").disabled=true;f.querySelector
 function submitDone(){document.getElementById("rsvpForm").style.display="none";document.getElementById("rsvpSuccess").classList.add("show");}
 document.getElementById("rsvpForm").addEventListener("submit",function(e){e.preventDefault();doSubmit(this);this.submit()});
 </script>
-<audio id="bgMusic" loop preload="auto" playsinline><source src="music/bgm.mp3" type="audio/mpeg"></audio>
-<div class="music-toggle paused" id="musicToggle" onclick="toggleMusic()">
-  <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#b8a07a" stroke="none"/><circle cx="18" cy="16" r="3" fill="#b8a07a" stroke="none"/></svg>
-</div>
 
 
 <script>
