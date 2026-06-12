@@ -625,14 +625,45 @@ section{padding:56px 32px;position:relative}
 </div><!-- /invitation -->
 
 <script>
-let pl=document.getElementById("preloader");function hp(){pl.classList.add("hidden")}window.addEventListener("load",()=>setTimeout(hp,300));setTimeout(hp,2000);
-const ro=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));document.getElementById("bgMusic").volume=0.5;(function(){var u=navigator.userAgent;if(!/iPhone|iPad|iPod/.test(u))document.getElementById("navBtn").href="https://www.google.com/maps/search/凯丽瑞斯酒店+天水"})();
-function toggleMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");if(a.paused){a.play().then(function(){t.classList.remove("paused");t.classList.add("playing")}).catch(function(){})}else{a.pause();t.classList.remove("playing");t.classList.add("paused")}}function startMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");a.play().then(function(){t.classList.remove("paused");t.classList.add("playing")}).catch(function(){})}document.body.style.overflow="hidden";document.getElementById("splash").addEventListener("click",function(){document.body.style.overflow="";this.classList.add("hidden");startMusic()});document.getElementById("splash").addEventListener("touchmove",function(e){e.preventDefault()},{passive:false});document.addEventListener("WeixinJSBridgeReady",startMusic,{once:true});if(window.WeixinJSBridge){startMusic()}
-function doSubmit(f){f.querySelector("#submitBtn").disabled=true;f.querySelector("#submitBtn").textContent="提交中…";}
-function submitDone(){document.getElementById("rsvpForm").style.display="none";document.getElementById("rsvpSuccess").classList.add("show")}
-document.getElementById("rsvpForm").addEventListener("submit",function(e){e.preventDefault();doSubmit(this);this.submit()})
+(function(){
+  var bg=document.getElementById("bgMusic"),mt=document.getElementById("musicToggle");
+  bg.volume=0.5;
 
+  // Nav: non-iOS → Google Maps
+  if(!/iPhone|iPad|iPod/.test(navigator.userAgent)){
+    document.getElementById("navBtn").href="https://www.google.com/maps/search/凯丽瑞斯酒店+天水";
+  }
+
+  function play(){bg.play().then(function(){mt.classList.remove("paused");mt.classList.add("playing")}).catch(function(){})}
+  function pause(){bg.pause();mt.classList.remove("playing");mt.classList.add("paused")}
+  window.toggleMusic=function(){bg.paused?play():pause()};
+
+  // Splash: click to enter + play music
+  var sp=document.getElementById("splash");
+  document.body.style.overflow="hidden";
+  sp.addEventListener("click",function(){
+    document.body.style.overflow="";
+    sp.classList.add("hidden");
+    play();
+  });
+  sp.addEventListener("touchmove",function(e){e.preventDefault()},{passive:false});
+
+  // WeChat auto-play
+  if(window.WeixinJSBridge) play();
+  document.addEventListener("WeixinJSBridgeReady",play,{once:true});
+
+  // Preloader
+  window.addEventListener("load",function(){setTimeout(function(){document.getElementById("preloader").classList.add("hidden")},300)});
+  setTimeout(function(){document.getElementById("preloader").classList.add("hidden")},2000);
+
+  // Reveal animations
+  var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("visible")})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(e){ro.observe(e)});
+})();
+
+function doSubmit(f){f.querySelector("#submitBtn").disabled=true;f.querySelector("#submitBtn").textContent="提交中…";}
+function submitDone(){document.getElementById("rsvpForm").style.display="none";document.getElementById("rsvpSuccess").classList.add("show");}
+document.getElementById("rsvpForm").addEventListener("submit",function(e){e.preventDefault();doSubmit(this);this.submit()});
 </script>
 <audio id="bgMusic" loop preload="auto" playsinline><source src="music/bgm.mp3" type="audio/mpeg"></audio>
 <div class="music-toggle paused" id="musicToggle" onclick="toggleMusic()">
@@ -645,6 +676,8 @@ document.getElementById("rsvpForm").addEventListener("submit",function(e){e.prev
   var p=new URLSearchParams(window.location.search);
   if(p.get("submitted")==="1"){
     document.getElementById("preloader").classList.add("hidden");
+    document.getElementById("splash").classList.add("hidden");
+    document.body.style.overflow="";
     setTimeout(function(){
       submitDone();
       document.getElementById("rsvpSuccess").scrollIntoView({behavior:"instant"});
