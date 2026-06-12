@@ -578,7 +578,7 @@ section{padding:56px 32px;position:relative}
 
   <!-- RSVP Form -->
   <div class="rsvp-form-card reveal reveal-d5">
-    <form id="rsvpForm">
+    <form id="rsvpForm" action="/submit" method="POST" target="rsvp-iframe" onsubmit="doSubmit(this)">
       <div class="form-group">
         <label class="form-label" for="name">姓名 <span>Full name</span></label>
         <input class="form-input" type="text" id="name" name="name" required>
@@ -656,5 +656,6 @@ function submitDone(){document.getElementById("rsvpForm").style.display="none";d
 })();
 </script>
 
+<iframe name="rsvp-iframe" id="rsvpIframe" style="display:none"></iframe>
 </body>
 </html>
