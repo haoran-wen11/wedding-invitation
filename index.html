@@ -632,10 +632,8 @@ const ro=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.c
 document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));
 function toggleMusic(){var a=document.getElementById("bgMusic"),t=document.getElementById("musicToggle");a.paused?(a.play().catch(function(){}),t.classList.remove("paused"),t.classList.add("playing")):(a.pause(),t.classList.remove("playing"),t.classList.add("paused"))}function _auto(){var a=document.getElementById("bgMusic");if(!a||!a.paused)return;a.play().catch(function(){});document.getElementById("musicToggle").classList.remove("paused");document.getElementById("musicToggle").classList.add("playing")}document.addEventListener("click",_auto,{once:true});document.addEventListener("touchstart",_auto,{once:true});document.addEventListener("WeixinJSBridgeReady",_auto,{once:true});if(window.WeixinJSBridge){_auto()}
 document.body.style.overflow="hidden";document.getElementById("splash").addEventListener("click",function(){document.body.style.overflow="";this.classList.add("hidden")});document.getElementById("splash").addEventListener("touchmove",function(e){e.preventDefault()},{passive:false});
-document.getElementById("rsvpForm").addEventListener("submit",function(e){
-  var btn=e.target.querySelector("#submitBtn");
-  btn.disabled=true;btn.textContent="提交中…";
-});
+function doSubmit(f){f.querySelector("#submitBtn").disabled=true;f.querySelector("#submitBtn").textContent="提交中…";}
+function submitDone(){document.getElementById("rsvpForm").style.display="none";document.getElementById("rsvpSuccess").classList.add("show")}
 
 </script>
 <audio id="bgMusic" loop preload="auto" playsinline><source src="music/bgm.mp3" type="audio/mpeg"></audio>
@@ -651,9 +649,8 @@ document.getElementById("rsvpForm").addEventListener("submit",function(e){
     document.getElementById("preloader").classList.add("hidden");
     document.getElementById("splash").classList.add("hidden");
     setTimeout(function(){
-      var f=document.getElementById("rsvpForm");
-      if(f){f.style.display="none";document.getElementById("rsvpSuccess").classList.add("show")}
-      document.getElementById("rsvpForm").scrollIntoView({behavior:"instant"});
+      submitDone();
+      document.getElementById("rsvpSuccess").scrollIntoView({behavior:"instant"});
     },100);
   }
 })();

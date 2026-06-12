@@ -15,7 +15,7 @@ export default {
           message: fd.get("message") || "",
           time: new Date().toLocaleString("zh-CN", {timeZone: "Asia/Shanghai"})
         }));
-        return new Response("",{status:302,headers:{"Location":"/?submitted=1",...CORS}});
+        return new Response("<!DOCTYPE html><script>parent.submitDone();<\/script>",{headers:{"Content-Type":"text/html;charset=utf-8"}});
       } catch (e) {
         return new Response(JSON.stringify({success: false}),
           {status:500,headers:{"Content-Type":"application/json",...CORS}});
